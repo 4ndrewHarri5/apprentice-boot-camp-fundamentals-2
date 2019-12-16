@@ -14,8 +14,8 @@ public class Frame {
         frameType = produceFrameType(roll1, roll2);
     }
 
-    public static Frame setAllRolls(int roll1, int roll2) {
-        return new Frame(roll1, roll2);
+    public static Frame setAllRolls(int roll1, int roll2/*, Frame nextFrame*/) {
+        return new Frame(roll1, roll2/*, nextFrame*/);
     }
 
     private FrameType produceFrameType(int roll1, int roll2) {
@@ -28,6 +28,9 @@ public class Frame {
     }
 
     public int getScore() {
+        if (frameType.equals(FrameType.STRIKE)) {
+
+        }
         return roll1 + roll2;
     }
 
