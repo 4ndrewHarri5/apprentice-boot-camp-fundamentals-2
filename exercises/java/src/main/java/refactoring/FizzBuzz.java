@@ -13,8 +13,8 @@ class FizzBuzz {
 
     String computeFizzBuzzUpTo100() {
         StringBuilder fizzBuzzBuilder = new StringBuilder();
-        int maximumFizzBuzzValue = Byte.MAX_VALUE - 27;
-        for (; fizzBuzzCounter < maximumFizzBuzzValue; fizzBuzzCounter++) {
+        int maximumFizzBuzzLimit = Byte.MAX_VALUE - 27;
+        for (; fizzBuzzCounter < maximumFizzBuzzLimit; fizzBuzzCounter++) {
             fizzBuzzBuilder.append(calculateNextFizzBuzz(fizzBuzzCounter)).append(" ");
         }
         return fizzBuzzBuilder.substring(0, fizzBuzzBuilder.length() - 1);
