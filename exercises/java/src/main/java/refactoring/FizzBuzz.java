@@ -11,7 +11,6 @@ class FizzBuzz {
     public static final int MAXIMUM_FIZZ_BUZZ_LIMIT = Byte.MAX_VALUE - 27;
     public static final int FIZZ_LIMIT = 0b11;
     public static final int BUZZ_LIMIT = 0;
-    public static final String EMPTY_VALUE = "";
     public static final int BUZZ_COUNT_START_VALUE = 5;
     public static final int FIZZ_COUNT_START_VALUE = 0;
     public static final String SPACE = " ";
@@ -32,11 +31,16 @@ class FizzBuzz {
     private String calculateNextFizzBuzz(int nextStep) {
         incrementFizzCounter();
         decrementBuzzCounter();
-        String fizzBuzzValue = String.valueOf(nextStep + 1);
+        return getFizzBuzzValue(nextStep);
+    }
+
+    private String getFizzBuzzValue(int nextStep) {
+        String fizzBuzzValue = "";
         final boolean divisibleByThree = fizzCounter == FIZZ_LIMIT;
         final boolean divisibleByFive = buzzCounter == BUZZ_LIMIT;
-        if (divisibleByThree || divisibleByFive){
-            fizzBuzzValue = EMPTY_VALUE;
+
+        if (!(divisibleByThree || divisibleByFive)){
+            fizzBuzzValue = String.valueOf(nextStep + 1);
         }
         if (divisibleByThree) {
             resetFizzCounter();
