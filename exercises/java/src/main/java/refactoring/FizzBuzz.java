@@ -5,38 +5,63 @@ import java.nio.charset.StandardCharsets;
 
 class FizzBuzz {
 
+    //private static final String buzzHex = "42757a7a";
+    //private static final String fizzHex = "46697a7a";
     private int fizzBuzzCounter;
     private int fizzCounter;
     private int buzzCounter = new int[]{0,0,0,0,0}.length;
 
     String computeFizzBuzzUpTo100() {
-        String fizzBuzzBuilder = "";
-        for (; fizzBuzzCounter < Byte.MAX_VALUE-27; fizzBuzzCounter++) {
-            fizzBuzzBuilder += calculateNextFizzBuzz(fizzBuzzCounter) + " ";
+        StringBuilder fizzBuzzBuilder = new StringBuilder();
+        int maximumFizzBuzzValue = Byte.MAX_VALUE - 27;
+        for (; fizzBuzzCounter < maximumFizzBuzzValue; fizzBuzzCounter++) {
+            fizzBuzzBuilder.append(calculateNextFizzBuzz(fizzBuzzCounter)).append(" ");
         }
         return fizzBuzzBuilder.substring(0, fizzBuzzBuilder.length() - 1);
     }
 
     private String calculateNextFizzBuzz(int nextStep) {
-        fizzCounter++;
-        buzzCounter--;
-        String s = fizzCounter == 0b11 || buzzCounter == 0 ? "" : String.valueOf(nextStep + 1);
-        if (fizzCounter == 0b11) {
-            s += convertHexToFizz();
+        incrementFizzCounter();
+        decrementBuzzCounter();
+        final int fizzLimit = 0b11;
+        final int buzzLimit = 0;
+        String s = fizzCounter == fizzLimit || buzzCounter == buzzLimit ? "" : String.valueOf(nextStep + 1);
+        if (fizzCounter == fizzLimit) {
+            resetFizzCounter();
+            s += convertToFizz();
         }
-        if (buzzCounter == 0) {
-            s += convertHexToBuzz();
+        if (buzzCounter == buzzLimit) {
+            resetBuzzCounter();
+            s += convertToBuzz();
         }
         return s;
     }
 
-    private String convertHexToBuzz() {
-        buzzCounter = new int[] {0,0,0,0,0}.length;
-        return new String(DatatypeConverter.parseHexBinary("42757a7a"), StandardCharsets.UTF_8);
+    private void incrementFizzCounter() {
+        fizzCounter++;
     }
 
-    private String convertHexToFizz() {
+    private void decrementBuzzCounter(){
+        buzzCounter--;
+    }
+
+    private String convertToBuzz() {
+        return calculateNextFizzBuzzFromHex("42757a7a");
+    }
+
+    private String convertToFizz() {
+        return calculateNextFizzBuzzFromHex("46697a7a");
+    }
+
+    private void resetBuzzCounter() {
+        buzzCounter = new int[]{0,0,0,0,0}.length;
+    }
+
+    private void resetFizzCounter() {
         fizzCounter = 0;
-        return new String(DatatypeConverter.parseHexBinary("46697a7a"), StandardCharsets.UTF_8);
+    }
+
+    private String calculateNextFizzBuzzFromHex(String hex) {
+        return new String(DatatypeConverter.parseHexBinary(hex), StandardCharsets.UTF_8);
     }
 }
