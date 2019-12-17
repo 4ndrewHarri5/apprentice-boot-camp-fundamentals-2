@@ -9,7 +9,7 @@ class FizzBuzz {
     //private static final String fizzHex = "46697a7a";
     private int fizzBuzzCounter;
     private int fizzCounter;
-    private int buzzCounter = new int[]{0,0,0,0,0}.length;
+    private int buzzCounter = new int[]{0, 0, 0, 0, 0}.length;
 
     String computeFizzBuzzUpTo100() {
         StringBuilder fizzBuzzBuilder = new StringBuilder();
@@ -25,36 +25,39 @@ class FizzBuzz {
         decrementBuzzCounter();
         final int fizzLimit = 0b11;
         final int buzzLimit = 0;
-        String s = fizzCounter == fizzLimit || buzzCounter == buzzLimit ? "" : String.valueOf(nextStep + 1);
+        String fizzBuzzValue = String.valueOf(nextStep + 1);
+        if (fizzCounter == fizzLimit || buzzCounter == buzzLimit){
+            fizzBuzzValue = "";
+        }
         if (fizzCounter == fizzLimit) {
             resetFizzCounter();
-            s += convertToFizz();
+            fizzBuzzValue += returnFizz();
         }
         if (buzzCounter == buzzLimit) {
             resetBuzzCounter();
-            s += convertToBuzz();
+            fizzBuzzValue += returnBuzz();
         }
-        return s;
+        return fizzBuzzValue;
     }
 
     private void incrementFizzCounter() {
         fizzCounter++;
     }
 
-    private void decrementBuzzCounter(){
+    private void decrementBuzzCounter() {
         buzzCounter--;
     }
 
-    private String convertToBuzz() {
+    private String returnBuzz() {
         return calculateNextFizzBuzzFromHex("42757a7a");
     }
 
-    private String convertToFizz() {
+    private String returnFizz() {
         return calculateNextFizzBuzzFromHex("46697a7a");
     }
 
     private void resetBuzzCounter() {
-        buzzCounter = new int[]{0,0,0,0,0}.length;
+        buzzCounter = new int[]{0, 0, 0, 0, 0}.length;
     }
 
     private void resetFizzCounter() {
