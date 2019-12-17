@@ -1,14 +1,27 @@
 package checkout;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 class Receipt {
 
     private String text = "";
-    private int numberOfA = 0;
-    private int numberOfB = 0;
     private int total;
 
-    String text() {
-        return text + "Total: " + total;
+    void generate(List<Product> products) {
+        String receiptText = products.stream().map(product -> {
+            if (product.getDiscount() != 0) {
+                final long numberOfProductsOfThatProduct = products.stream().filter(p -> p.equals(product)).count();
+                if(numberOfProductsOfThatProduct % product.getNumberToTrigger() == 0) {
+                    text += " - " + product.getDiscount() + " (" + product.getNumberToTrigger() + " for " + product.getTotalForDiscount() + " )";
+                    total += product.getPrice() - product.getDiscount();
+                }else{
+                    total += product.getPrice();
+                }
+                text += "\n";
+            }
+            return "";
+        }).collect(Collectors.joining());
     }
 
     void scannedA() {
@@ -43,5 +56,13 @@ class Receipt {
     void scannedD() {
         text += "D: 15\n";
         total += 15;
+    }
+
+    String getText() {
+        return text + "Total: " + total;
+    }
+
+    int getTotal() {
+        return total;
     }
 }

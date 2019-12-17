@@ -1,13 +1,23 @@
 package checkout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Checkout {
     private int total;
-    private int numberOfA = 0;
-    private int numberOfB = 0;
+    private List<Product> allProducts;
     private Receipt receipt = new Receipt();
 
+    public Checkout() {
+        allProducts = new ArrayList<>();
+    }
+
     void scan(String sku) {
-        if ("A".equals(sku)) {
+
+        Product product = Product.parse(sku);
+        allProducts.add(product);
+
+        /*if ("A".equals(sku)) {
             total += 50;
             if (++numberOfA % 5 == 0) {
                 total -= 30;
@@ -25,14 +35,14 @@ class Checkout {
         } else if ("D".equals(sku)) {
             total += 15;
             receipt.scannedD();
-        }
+        }*/
     }
 
     int total() {
-        return total;
+        return receipt.getTotal();
     }
 
     String receipt() {
-        return receipt.text();
+        return receipt.getText();
     }
 }
