@@ -21,15 +21,11 @@ class FizzBuzz {
     private int buzzCounter = BUZZ_COUNT_START_VALUE;
 
     String computeFizzBuzzUpTo100() {
-        StringBuilder fizzBuzzBuilder = new StringBuilder();
+        String fizzBuzzBuilder = "";
         for (; fizzBuzzCounter < MAXIMUM_FIZZ_BUZZ_LIMIT; fizzBuzzCounter++) {
-            fizzBuzzBuilder.append(calculateNextFizzBuzz(fizzBuzzCounter)).append(SPACE);
+            fizzBuzzBuilder += calculateNextFizzBuzz(fizzBuzzCounter) + SPACE;
         }
-        return removeLastCharacter(fizzBuzzBuilder);
-    }
-
-    private String removeLastCharacter(StringBuilder builder) {
-        return builder.substring(0, builder.length() - 1);
+        return fizzBuzzBuilder.trim();
     }
 
     private String calculateNextFizzBuzz(int nextStep) {

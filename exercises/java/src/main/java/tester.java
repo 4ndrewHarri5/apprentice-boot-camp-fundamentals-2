@@ -20,7 +20,7 @@ public class tester {
             }
             return fizzBuzzValue;
         }).collect(Collectors.joining());
-        System.out.println("collect = " + collect);
+        System.out.println(collect.trim());
     }
 
 }
