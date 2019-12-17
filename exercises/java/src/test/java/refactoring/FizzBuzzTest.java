@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class FizzBuzzTest {
 
     @Test
-    public void itWorks() {
+    public void whenComputeFizzBuzzRunsThenReturnAllFizzBuzzUpTo100() {
         assertThat(new FizzBuzz().computeFizzBuzzUpTo100().equals(new String(
                 DatatypeConverter.parseHexBinary(
                         "3120322046697a7a20342042757a7a2046697a7a203720382046697a7a2042757a7a203131" +
