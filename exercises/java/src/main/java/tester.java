@@ -16,7 +16,7 @@ public class tester {
                 fizzBuzzValue += "buzz ";
             }
             if (!isDivisible) {
-                fizzBuzzValue = String.valueOf(number) + " ";
+                fizzBuzzValue = number + " ";
             }
             return fizzBuzzValue;
         }).collect(Collectors.joining());
